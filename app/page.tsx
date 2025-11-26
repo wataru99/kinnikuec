@@ -184,14 +184,12 @@ export default function HomePage() {
 
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* サイドバー - フィルター（デスクトップ） */}
-          <aside className="hidden lg:block w-56 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow p-6 sticky top-24">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">絞り込み</h2>
-
+          <aside className="hidden lg:block w-52 flex-shrink-0">
+            <div className="sticky top-24 space-y-8">
               {/* カテゴリー */}
-              <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">カテゴリー</h3>
-                <div className="space-y-1">
+              <div>
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">カテゴリー</h3>
+                <div className="space-y-0.5">
                   {[
                     { value: "all", label: "全て" },
                     { value: "supplement", label: categoryLabels.supplement },
@@ -202,10 +200,10 @@ export default function HomePage() {
                     <button
                       key={cat.value}
                       onClick={() => handleCategoryChange(cat.value)}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                      className={`w-full text-left px-3 py-2 text-sm transition-all duration-200 border-l-2 ${
                         selectedCategory === cat.value
-                          ? "bg-blue-600 text-white font-medium"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "border-gray-900 bg-gray-100 text-gray-900 font-medium"
+                          : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                       }`}
                     >
                       {cat.label}
@@ -215,9 +213,9 @@ export default function HomePage() {
               </div>
 
               {/* 価格帯 */}
-              <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">価格帯</h3>
-                <div className="space-y-1">
+              <div>
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">価格帯</h3>
+                <div className="space-y-0.5">
                   {[
                     { value: "all", label: "全て" },
                     { value: "under_2000", label: "¥2,000以下" },
@@ -227,10 +225,10 @@ export default function HomePage() {
                     <button
                       key={price.value}
                       onClick={() => handlePriceChange(price.value)}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                      className={`w-full text-left px-3 py-2 text-sm transition-all duration-200 border-l-2 ${
                         priceRange === price.value
-                          ? "bg-blue-600 text-white font-medium"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "border-gray-900 bg-gray-100 text-gray-900 font-medium"
+                          : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                       }`}
                     >
                       {price.label}
@@ -241,8 +239,8 @@ export default function HomePage() {
 
               {/* ソート */}
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-3">並び替え</h3>
-                <div className="space-y-1">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">並び替え</h3>
+                <div className="space-y-0.5">
                   {[
                     { value: "new", label: "新着順" },
                     { value: "popular", label: "人気順" },
@@ -252,10 +250,10 @@ export default function HomePage() {
                     <button
                       key={sort.value}
                       onClick={() => handleSortChange(sort.value)}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                      className={`w-full text-left px-3 py-2 text-sm transition-all duration-200 border-l-2 ${
                         sortBy === sort.value
-                          ? "bg-blue-600 text-white font-medium"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "border-gray-900 bg-gray-100 text-gray-900 font-medium"
+                          : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                       }`}
                     >
                       {sort.label}
