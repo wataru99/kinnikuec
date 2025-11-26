@@ -245,13 +245,11 @@ export default function ProductDetailPage() {
               )}
 
               {/* 在庫状況 */}
-              <div className="mb-4">
-                {product.stock > 0 ? (
-                  <span className="text-green-600 text-sm">在庫あり（残り{product.stock}個）</span>
-                ) : (
+              {product.stock === 0 && (
+                <div className="mb-4">
                   <span className="text-red-600 text-sm">在庫切れ</span>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* 数量選択 */}
               <div className="flex items-center mb-6">
