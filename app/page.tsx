@@ -191,7 +191,7 @@ export default function HomePage() {
               {/* カテゴリー */}
               <div className="mb-6">
                 <h3 className="text-sm font-medium text-gray-700 mb-3">カテゴリー</h3>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {[
                     { value: "all", label: "全て" },
                     { value: "supplement", label: categoryLabels.supplement },
@@ -199,17 +199,17 @@ export default function HomePage() {
                     { value: "wear", label: categoryLabels.wear },
                     { value: "accessories", label: categoryLabels.accessories },
                   ].map((cat) => (
-                    <label key={cat.value} className="flex items-center">
-                      <input
-                        type="radio"
-                        name="category"
-                        value={cat.value}
-                        checked={selectedCategory === cat.value}
-                        onChange={(e) => handleCategoryChange(e.target.value)}
-                        className="w-4 h-4 text-blue-600"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">{cat.label}</span>
-                    </label>
+                    <button
+                      key={cat.value}
+                      onClick={() => handleCategoryChange(cat.value)}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                        selectedCategory === cat.value
+                          ? "bg-blue-600 text-white font-medium"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -217,24 +217,24 @@ export default function HomePage() {
               {/* 価格帯 */}
               <div className="mb-6">
                 <h3 className="text-sm font-medium text-gray-700 mb-3">価格帯</h3>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {[
                     { value: "all", label: "全て" },
                     { value: "under_2000", label: "¥2,000以下" },
                     { value: "2000_5000", label: "¥2,000 - ¥5,000" },
                     { value: "over_5000", label: "¥5,000以上" },
                   ].map((price) => (
-                    <label key={price.value} className="flex items-center">
-                      <input
-                        type="radio"
-                        name="price"
-                        value={price.value}
-                        checked={priceRange === price.value}
-                        onChange={(e) => handlePriceChange(e.target.value)}
-                        className="w-4 h-4 text-blue-600"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">{price.label}</span>
-                    </label>
+                    <button
+                      key={price.value}
+                      onClick={() => handlePriceChange(price.value)}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                        priceRange === price.value
+                          ? "bg-blue-600 text-white font-medium"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                    >
+                      {price.label}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -242,16 +242,26 @@ export default function HomePage() {
               {/* ソート */}
               <div>
                 <h3 className="text-sm font-medium text-gray-700 mb-3">並び替え</h3>
-                <select
-                  value={sortBy}
-                  onChange={(e) => handleSortChange(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                >
-                  <option value="new">新着順</option>
-                  <option value="popular">人気順</option>
-                  <option value="price_asc">価格が安い順</option>
-                  <option value="price_desc">価格が高い順</option>
-                </select>
+                <div className="space-y-1">
+                  {[
+                    { value: "new", label: "新着順" },
+                    { value: "popular", label: "人気順" },
+                    { value: "price_asc", label: "価格が安い順" },
+                    { value: "price_desc", label: "価格が高い順" },
+                  ].map((sort) => (
+                    <button
+                      key={sort.value}
+                      onClick={() => handleSortChange(sort.value)}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                        sortBy === sort.value
+                          ? "bg-blue-600 text-white font-medium"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                    >
+                      {sort.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </aside>
