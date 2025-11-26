@@ -1,6 +1,9 @@
 import {
   collection,
   addDoc,
+  query,
+  where,
+  getDocs,
   Timestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
@@ -63,10 +66,19 @@ export async function createOrder(input: CreateOrderInput): Promise<{
   const shipping = subtotal >= 10000 ? 0 : 500; // 10,000円以上で送料無料
   const total = subtotal + tax + shipping;
 
+  // undefinedの値を除去（Firebaseはundefinedを受け付けない）
+  const shippingAddress = {
+    zipCode: input.shippingAddress.zipCode,
+    prefecture: input.shippingAddress.prefecture,
+    city: input.shippingAddress.city,
+    address: input.shippingAddress.address,
+    ...(input.shippingAddress.building ? { building: input.shippingAddress.building } : {}),
+  };
+
   const orderData = {
     orderNumber,
     customer: input.customer,
-    shippingAddress: input.shippingAddress,
+    shippingAddress,
     items,
     subtotal,
     tax,
@@ -103,4 +115,43 @@ export function calculateOrderTotals(cartItems: CartItem[]): {
   const total = subtotal + tax + shipping;
 
   return { subtotal, tax, shipping, total };
+}
+
+// 注文番号で注文を取得
+export async function getOrderByOrderNumber(orderNumber: string): Promise<Order | null> {
+  if (!db) throw new Error("Firestore is not initialized");
+
+  const q = query(
+    collection(db, COLLECTION_NAME),
+    where("orderNumber", "==", orderNumber)
+  );
+  const snapshot = await getDocs(q);
+
+  if (snapshot.empty) {
+    return null;
+  }
+
+  const doc = snapshot.docs[0];
+  const data = doc.data();
+
+  return {
+    id: doc.id,
+    orderNumber: data.orderNumber,
+    customer: data.customer,
+    shippingAddress: data.shippingAddress,
+    items: data.items,
+    subtotal: data.subtotal,
+    tax: data.tax,
+    shipping: data.shipping,
+    total: data.total,
+    paymentMethod: data.paymentMethod,
+    paymentStatus: data.paymentStatus,
+    status: data.status,
+    createdAt: data.createdAt instanceof Timestamp
+      ? data.createdAt.toDate().toISOString()
+      : data.createdAt,
+    updatedAt: data.updatedAt instanceof Timestamp
+      ? data.updatedAt.toDate().toISOString()
+      : data.updatedAt,
+  };
 }
