@@ -112,11 +112,11 @@ export default function ProductDetailPage() {
 
         {/* 商品詳細 */}
         <div className="bg-white rounded-lg shadow p-4 lg:p-6 mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* 商品画像 */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-2">
               {/* メイン画像 */}
-              <div className="aspect-[4/3] bg-gray-100 rounded-lg relative overflow-hidden mb-4">
+              <div className="aspect-square bg-gray-100 rounded-lg relative overflow-hidden mb-4">
                 {product.images && product.images.length > 0 ? (
                   <Image
                     src={product.images[selectedImageIndex]}
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
             </div>
 
             {/* 商品情報 */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-1">
               {/* カテゴリー */}
               <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mb-4">
                 {categoryLabels[product.category]}
