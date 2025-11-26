@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
-        <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+        <main className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6 py-8 flex-1">
           <div className="flex items-center justify-center h-64">
             <div className="text-gray-500">読み込み中...</div>
           </div>
@@ -62,7 +62,7 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
-        <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+        <main className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6 py-8 flex-1">
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
             <p className="text-red-700">{error}</p>
             <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">

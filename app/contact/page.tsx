@@ -24,7 +24,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
+      <main className="max-w-2xl mx-auto px-3 sm:px-4 lg:px-6 py-12 flex-1 w-full">
         <div className="mb-8">
           <Link href="/" className="text-blue-600 hover:underline text-sm">
             ← 商品一覧に戻る
