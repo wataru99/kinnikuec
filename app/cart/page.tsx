@@ -17,7 +17,7 @@ export default function CartPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
 
-      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1 w-full">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           ショッピングカート
         </h1>
