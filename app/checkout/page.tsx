@@ -100,7 +100,7 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* ヘッダー */}
       <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6 py-4">
+        <div className="max-w-5xl mx-auto px-2 sm:px-3 lg:px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-2xl font-bold text-gray-900">
               筋肉ショップ
@@ -123,7 +123,7 @@ export default function CheckoutPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6 py-8 flex-1 w-full">
+      <main className="max-w-5xl mx-auto px-2 sm:px-3 lg:px-4 py-8 flex-1 w-full">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           ご注文内容の確認
         </h1>
