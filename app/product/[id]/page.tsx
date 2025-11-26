@@ -130,27 +130,75 @@ export default function ProductDetailPage() {
                   </div>
                 )}
               </div>
-              {/* サムネイル */}
-              {product.images && product.images.length > 1 && (
-                <div className="grid grid-cols-5 gap-2">
-                  {product.images.map((img, index) => (
+              {/* サムネイル + 数量・カートボタン */}
+              <div className="flex items-center gap-4">
+                {/* サムネイル */}
+                {product.images && product.images.length > 1 && (
+                  <div className="flex gap-2">
+                    {product.images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImageIndex(index)}
+                        className={`w-16 h-16 bg-gray-100 rounded-lg relative overflow-hidden flex-shrink-0 ${
+                          selectedImageIndex === index ? "ring-2 ring-blue-600" : ""
+                        }`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${product.name} ${index + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* 数量選択 + カートボタン */}
+                <div className="flex items-center gap-3 ml-auto">
+                  {/* 数量選択 */}
+                  <div className="flex items-center">
                     <button
-                      key={index}
-                      onClick={() => setSelectedImageIndex(index)}
-                      className={`aspect-square bg-gray-100 rounded-lg relative overflow-hidden ${
-                        selectedImageIndex === index ? "ring-2 ring-blue-600" : ""
-                      }`}
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-8 h-8 rounded-l-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
                     >
-                      <Image
-                        src={img}
-                        alt={`${product.name} ${index + 1}`}
-                        fill
-                        className="object-cover"
-                      />
+                      -
                     </button>
-                  ))}
+                    <span className="w-10 h-8 flex items-center justify-center bg-gray-100 text-gray-900 font-medium text-sm">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                      className="w-8 h-8 rounded-r-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* カートに追加ボタン */}
+                  <button
+                    disabled={product.stock === 0}
+                    onClick={() => {
+                      addToCart(
+                        {
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image: product.images?.[0] || "/placeholder-product.jpg",
+                        },
+                        quantity
+                      );
+                    }}
+                    className={`px-6 py-2 rounded-lg font-bold text-sm transition-colors ${
+                      product.stock > 0
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    }`}
+                  >
+                    カートに追加
+                  </button>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* 商品情報 */}
@@ -250,49 +298,6 @@ export default function ProductDetailPage() {
                   <span className="text-red-600 text-sm">在庫切れ</span>
                 </div>
               )}
-
-              {/* 数量選択 */}
-              <div className="flex items-center mb-6">
-                <span className="text-gray-700 mr-4">数量:</span>
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-l-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700"
-                >
-                  -
-                </button>
-                <span className="w-12 h-10 flex items-center justify-center bg-gray-100 text-gray-900 font-medium">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="w-10 h-10 rounded-r-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700"
-                >
-                  +
-                </button>
-              </div>
-
-              {/* カートに追加ボタン */}
-              <button
-                disabled={product.stock === 0}
-                onClick={() => {
-                  addToCart(
-                    {
-                      id: product.id,
-                      name: product.name,
-                      price: product.price,
-                      image: product.images?.[0] || "/placeholder-product.jpg",
-                    },
-                    quantity
-                  );
-                }}
-                className={`w-full py-3 rounded-lg font-bold text-lg transition-colors ${
-                  product.stock > 0
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-              >
-                カートに追加
-              </button>
             </div>
           </div>
         </div>
