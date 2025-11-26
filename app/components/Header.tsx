@@ -11,12 +11,7 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
       <div className="max-w-5xl mx-auto px-2 sm:px-3 lg:px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* ロゴ */}
-          <Link href="/" className="text-xl sm:text-2xl font-bold text-gray-900">
-            筋肉ショップ
-          </Link>
-
+        <div className="flex items-center justify-end">
           {/* デスクトップナビゲーション */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
