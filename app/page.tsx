@@ -90,7 +90,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
 
-      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* モバイル: フィルターボタン */}
         <div className="lg:hidden mb-4 flex items-center justify-between">
           <button
@@ -182,9 +182,9 @@ export default function HomePage() {
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* サイドバー - フィルター（デスクトップ） */}
-          <aside className="hidden lg:block lg:w-64 flex-shrink-0">
+          <aside className="hidden lg:block w-56 flex-shrink-0">
             <div className="bg-white rounded-lg shadow p-6 sticky top-24">
               <h2 className="text-lg font-bold text-gray-900 mb-4">絞り込み</h2>
 
@@ -257,7 +257,7 @@ export default function HomePage() {
           </aside>
 
           {/* 商品グリッド */}
-          <div className="flex-1">
+          <div className="w-full lg:max-w-4xl">
             {isLoading ? (
               <div className="flex items-center justify-center h-64">
                 <div className="text-gray-500">読み込み中...</div>
@@ -276,7 +276,7 @@ export default function HomePage() {
                 </div>
 
                 {paginatedProducts.length > 0 ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {paginatedProducts.map((product) => (
                       <Link
                         href={`/product/${product.id}`}
