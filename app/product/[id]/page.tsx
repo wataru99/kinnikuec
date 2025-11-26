@@ -111,7 +111,7 @@ export default function ProductDetailPage() {
         </nav>
 
         {/* 商品詳細 */}
-        <div className="bg-white rounded-lg shadow p-4 lg:p-6 mb-8">
+        <div className="mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* 商品画像 */}
             <div className="lg:col-span-2">
