@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Footer from "../components/Footer";
 
 function OrderCompleteContent() {
   const searchParams = useSearchParams();
@@ -31,10 +32,10 @@ function OrderCompleteContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* ヘッダー */}
       <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-2xl font-bold text-gray-900">
               筋肉ショップ
@@ -51,7 +52,7 @@ function OrderCompleteContent() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-12 flex-1 w-full">
         {/* 成功メッセージ */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
@@ -213,13 +214,15 @@ function OrderCompleteContent() {
         <div className="mt-8 text-center text-sm text-gray-600">
           <p>
             ご不明な点がございましたら、
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link href="/contact" className="text-blue-600 hover:underline">
               お問い合わせ
-            </a>
+            </Link>
             よりご連絡ください。
           </p>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

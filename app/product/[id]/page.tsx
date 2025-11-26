@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { useCart } from "../../components/CartContext";
 import { getProductById, getRelatedProducts } from "@/lib/services/productService";
 import { type Product, categoryLabels } from "@/lib/types";
@@ -45,22 +46,23 @@ export default function ProductDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
-        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
+        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1">
           <div className="flex items-center justify-center h-64">
             <div className="text-gray-500">読み込み中...</div>
           </div>
         </main>
+        <Footer />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
-        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
+        <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1">
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
             <p className="text-red-700">{error}</p>
             <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">
@@ -68,28 +70,33 @@ export default function ProductDetailPage() {
             </Link>
           </div>
         </main>
+        <Footer />
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">商品が見つかりません</h1>
-          <Link href="/" className="text-blue-600 hover:underline">
-            商品一覧に戻る
-          </Link>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">商品が見つかりません</h1>
+            <Link href="/" className="text-blue-600 hover:underline">
+              商品一覧に戻る
+            </Link>
+          </div>
+        </main>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1">
         {/* パンくずリスト */}
         <nav className="mb-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
@@ -348,14 +355,7 @@ export default function ProductDetailPage() {
         )}
       </main>
 
-      {/* フッター */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-sm text-gray-600">
-            <p>&copy; 2024 筋肉ショップ All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

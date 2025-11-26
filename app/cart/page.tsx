@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
 
 export default function CartPage() {
@@ -13,10 +14,10 @@ export default function CartPage() {
   const total = subtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1 w-full">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           ショッピングカート
         </h1>
@@ -164,14 +165,7 @@ export default function CartPage() {
         )}
       </main>
 
-      {/* フッター */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-sm text-gray-600">
-            <p>&copy; 2024 筋肉ショップ All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
