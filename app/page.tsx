@@ -89,7 +89,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-8">
         {/* モバイル: フィルターボタン */}
         <div className="lg:hidden mb-4 flex items-center justify-between">
           <button
