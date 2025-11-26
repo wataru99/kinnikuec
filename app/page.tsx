@@ -284,68 +284,64 @@ export default function HomePage() {
                 </div>
 
                 {paginatedProducts.length > 0 ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {paginatedProducts.map((product) => (
                       <Link
                         href={`/product/${product.id}`}
                         key={product.id}
-                        className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden block"
+                        className="group block"
                       >
                         {/* 商品画像 */}
-                        <div className="h-32 sm:h-48 bg-gray-100 relative">
+                        <div className="aspect-square bg-gray-100 relative overflow-hidden">
                           {product.images && product.images.length > 0 ? (
                             <Image
                               src={product.images[0]}
                               alt={product.name}
                               fill
-                              className="object-cover"
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                           ) : (
                             <div className="h-full flex items-center justify-center">
-                              <span className="text-gray-400 text-sm">商品画像</span>
+                              <span className="text-gray-400 text-xs tracking-wide">NO IMAGE</span>
                             </div>
                           )}
                         </div>
 
                         {/* 商品情報 */}
-                        <div className="px-3 py-2">
+                        <div className="pt-3">
+                          {/* カテゴリー */}
+                          <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                            {categoryLabels[product.category]}
+                          </p>
+
+                          {/* 商品名 */}
+                          <h3 className="text-sm text-gray-900 line-clamp-1 mb-1 tracking-wide">
+                            {product.name}
+                          </h3>
+
                           {/* 価格 */}
-                          <div className="flex items-baseline gap-1.5 flex-wrap">
+                          <div className="flex items-baseline gap-2">
                             {product.originalPrice && product.originalPrice > product.price ? (
                               <>
                                 <span className="text-xs text-gray-400 line-through">
                                   ¥{product.originalPrice.toLocaleString()}
                                 </span>
-                                <span className="text-sm text-red-600">
+                                <span className="text-sm text-gray-900 tracking-wide">
                                   ¥{product.price.toLocaleString()}
                                 </span>
-                                <span className="text-xs text-gray-500">(税込)</span>
                               </>
                             ) : (
-                              <>
-                                <span className="text-sm text-gray-900">
-                                  ¥{product.price.toLocaleString()}
-                                </span>
-                                <span className="text-xs text-gray-500">(税込)</span>
-                              </>
+                              <span className="text-sm text-gray-900 tracking-wide">
+                                ¥{product.price.toLocaleString()}
+                              </span>
                             )}
                           </div>
-
-                          {/* 商品名 */}
-                          <h3 className="text-sm text-gray-900 line-clamp-1 mt-1">
-                            {product.name}
-                          </h3>
-
-                          {/* カテゴリー */}
-                          <p className="text-xs text-gray-500">
-                            {categoryLabels[product.category]}
-                          </p>
                         </div>
                       </Link>
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-white rounded-lg shadow p-12 text-center">
+                  <div className="p-12 text-center">
                     <p className="text-gray-500">
                       条件に一致する商品が見つかりませんでした
                     </p>
