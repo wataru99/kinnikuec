@@ -130,78 +130,27 @@ export default function ProductDetailPage() {
                   </div>
                 )}
               </div>
-              {/* サムネイル + 数量・カートボタン */}
-              <div className="flex items-center justify-between">
-                {/* サムネイル */}
+              {/* サムネイル */}
+              {product.images && product.images.length > 1 && (
                 <div className="flex gap-2">
-                  {product.images && product.images.length > 1 ? (
-                    product.images.map((img, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedImageIndex(index)}
-                        className={`w-16 h-16 bg-gray-100 rounded-lg relative overflow-hidden flex-shrink-0 ${
-                          selectedImageIndex === index ? "ring-2 ring-blue-600" : ""
-                        }`}
-                      >
-                        <Image
-                          src={img}
-                          alt={`${product.name} ${index + 1}`}
-                          fill
-                          className="object-cover"
-                        />
-                      </button>
-                    ))
-                  ) : (
-                    <div className="w-16 h-16"></div>
-                  )}
-                </div>
-
-                {/* 数量・カートボタン */}
-                <div className="flex flex-col items-end gap-2">
-                  {/* 数量選択 */}
-                  <div className="flex items-center">
-                    <span className="text-gray-700 mr-3 text-sm">数量:</span>
+                  {product.images.map((img, index) => (
                     <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-8 h-8 rounded-l-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`w-16 h-16 bg-gray-100 rounded-lg relative overflow-hidden flex-shrink-0 ${
+                        selectedImageIndex === index ? "ring-2 ring-blue-600" : ""
+                      }`}
                     >
-                      -
+                      <Image
+                        src={img}
+                        alt={`${product.name} ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
                     </button>
-                    <span className="w-10 h-8 flex items-center justify-center bg-gray-100 text-gray-900 font-medium text-sm">
-                      {quantity}
-                    </span>
-                    <button
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                      className="w-8 h-8 rounded-r-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  {/* カートに追加ボタン */}
-                  <button
-                    disabled={product.stock === 0}
-                    onClick={() => {
-                      addToCart(
-                        {
-                          id: product.id,
-                          name: product.name,
-                          price: product.price,
-                          image: product.images?.[0] || "/placeholder-product.jpg",
-                        },
-                        quantity
-                      );
-                    }}
-                    className={`px-8 py-2 rounded-lg font-bold text-sm transition-colors ${
-                      product.stock > 0
-                        ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    }`}
-                  >
-                    カートに追加
-                  </button>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
 
             {/* 商品情報 */}
@@ -301,6 +250,52 @@ export default function ProductDetailPage() {
                   <span className="text-red-600 text-sm">在庫切れ</span>
                 </div>
               )}
+
+              {/* 数量・カートボタン */}
+              <div className="flex flex-col gap-3 mt-4">
+                {/* 数量選択 */}
+                <div className="flex items-center">
+                  <span className="text-gray-700 mr-3 text-sm">数量:</span>
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-8 h-8 rounded-l-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
+                  >
+                    -
+                  </button>
+                  <span className="w-10 h-8 flex items-center justify-center bg-gray-100 text-gray-900 font-medium text-sm">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                    className="w-8 h-8 rounded-r-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-700 text-sm"
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* カートに追加ボタン */}
+                <button
+                  disabled={product.stock === 0}
+                  onClick={() => {
+                    addToCart(
+                      {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.images?.[0] || "/placeholder-product.jpg",
+                      },
+                      quantity
+                    );
+                  }}
+                  className={`w-full py-3 rounded-lg font-bold text-sm transition-colors ${
+                    product.stock > 0
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  カートに追加
+                </button>
+              </div>
             </div>
           </div>
         </div>
